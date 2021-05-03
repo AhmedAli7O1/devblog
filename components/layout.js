@@ -113,20 +113,13 @@ export default function Layout({ children, home }) {
           </>
         )}
       </Disclosure>
-      {
-        home ? (
-          <main className="px-4 py-6 flex flex-row flex-wrap">
-            <div className="w-full md:w-9/12">{children}</div>
-            <div className="w-full md:w-3/12">
-              <AuthorCard />
-            </div>
-          </main>
-        ) : (
-          <main className="px-12 py-6 flex">
-            <div className="w-full">{children}</div>
-          </main>
-        )
-      }
+      <main className="px-4 py-6 flex flex-row flex-wrap">
+        <div className="flex flex-col items-center w-full md:w-9/12 ">{children}</div>
+        <div className="flex flex-col justify-center items-center w-full md:w-3/12">
+          <AuthorCard />
+          <AuthorCard />
+        </div>
+      </main>
       <footer className="bg-gray-100 sm:py-6">
         <div className="container mx-auto px-4">
           <div className="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
