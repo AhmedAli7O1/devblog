@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start"
   },
   "dependencies": {
@@ -20,5 +20,9 @@
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
     "tailwindcss": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.4",
+    "typescript": "^4.2.4"
   }
 }
