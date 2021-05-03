@@ -5,14 +5,16 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import AuthorCard from './author-card';
 
 const name = 'Ahmed Ali';
 export const siteTitle = 'Next.js Sample Website';
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
+  { name: 'Open Source', href: '#', current: false },
+  { name: 'Backend', href: '#', current: false },
+  { name: 'Security', href: '#', current: false },
   { name: 'About', href: '#', current: false },
 ]
 
@@ -23,6 +25,21 @@ function classNames(...classes) {
 export default function Layout({ children, home }) {
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Learn how to build a personal website using Next.js"
+        />
+        <meta
+          property="og:image"
+          content={`https://og-image.vercel.app/${encodeURI(
+            siteTitle
+          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+        />
+        <meta name="og:title" content={siteTitle} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
           <>
@@ -96,11 +113,24 @@ export default function Layout({ children, home }) {
           </>
         )}
       </Disclosure>
-      <main>{children}</main>
-      <footer className="footer-1 bg-gray-100 py-8 sm:py-12">
+      {
+        home ? (
+          <main className="px-4 py-6 flex flex-row flex-wrap">
+            <div className="w-full md:w-9/12">{children}</div>
+            <div className="w-full md:w-3/12">
+              <AuthorCard />
+            </div>
+          </main>
+        ) : (
+          <main className="px-12 py-6 flex">
+            <div className="w-full">{children}</div>
+          </main>
+        )
+      }
+      <footer className="bg-gray-100 sm:py-6">
         <div className="container mx-auto px-4">
           <div className="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6">
+            <div className="px-4 sm:w-1/2 md:w-1/2 xl:w-1/3">
               <h5 className="text-xl font-bold mb-6">Features</h5>
               <ul className="list-none footer-links">
                 <li className="mb-2">
@@ -123,7 +153,7 @@ export default function Layout({ children, home }) {
                 </li>
               </ul>
             </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 sm:mt-0">
+            <div className="px-4 sm:w-1/2 md:w-1/2 xl:w-1/3 mt-8 sm:mt-0">
               <h5 className="text-xl font-bold mb-6">Resources</h5>
               <ul className="list-none footer-links">
                 <li className="mb-2">
@@ -140,7 +170,7 @@ export default function Layout({ children, home }) {
                 </li>
               </ul>
             </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0">
+            <div className="px-4 sm:w-1/2 md:w-1/2 xl:w-1/3 mt-8 md:mt-0">
               <h5 className="text-xl font-bold mb-6">About</h5>
               <ul className="list-none footer-links">
                 <li className="mb-2">
@@ -157,36 +187,8 @@ export default function Layout({ children, home }) {
                 </li>
               </ul>
             </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0">
-              <h5 className="text-xl font-bold mb-6">Help</h5>
-              <ul className="list-none footer-links">
-                <li className="mb-2">
-                  <a href="#" className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">Support</a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">Help Center</a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800">Contact Us</a>
-                </li>
-              </ul>
-            </div>
-            <div className="px-4 mt-4 sm:w-1/3 xl:w-1/6 sm:mx-auto xl:mt-0 xl:ml-auto">
-              <h5 className="text-xl font-bold mb-6 sm:text-center xl:text-left">Stay connected</h5>
-              <div className="flex sm:justify-center xl:justify-start">
-                <a href className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-blue-600 hover:border-blue-600">
-                  <i className="fab fa-facebook" />
-                </a>
-                <a href className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-blue-400 hover:border-blue-400">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-red-600 hover:border-red-600">
-                  <i className="fab fa-google-plus-g" />
-                </a>
-              </div>
-            </div>
           </div>
-          <div className="sm:flex justify-center sm:flex-wrap sm:-mx-4 mt-6 pt-6 sm:mt-12 sm:pt-12 border-t">
+          <div className="sm:flex justify-center sm:flex-wrap sm:-mx-4 sm:mt-6 sm:pt-6 border-t">
             <p>
               Copyright ©
               {" "}
@@ -200,6 +202,7 @@ export default function Layout({ children, home }) {
     </>
   )
 }
+
 
 
 
