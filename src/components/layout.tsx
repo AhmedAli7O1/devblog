@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import AuthorCard from './author-card';
+import { getAuthor } from '../lib/authors';
 
 const name = 'Ahmed Ali';
 export const siteTitle = 'Next.js Sample Website';
@@ -116,8 +117,8 @@ export default function Layout({ children }) {
       <main className="px-4 py-6 flex flex-row flex-wrap">
         <div className="flex flex-col items-center w-full md:w-9/12 ">{children}</div>
         <div className="flex flex-col justify-center items-center w-full md:w-3/12">
-          <AuthorCard />
-          <AuthorCard />
+          <AuthorCard author={getAuthor('ahmedali7o1')} />
+          <AuthorCard author={getAuthor('ahmedali7o1')} />
         </div>
       </main>
       <footer className="bg-gray-100 sm:py-6">

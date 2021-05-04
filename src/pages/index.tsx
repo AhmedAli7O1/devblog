@@ -3,6 +3,7 @@ import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
 import PostCard from '../components/post-card';
+import { getAuthor } from '../lib/authors';
 
 
 export async function getStaticProps() {
@@ -33,14 +34,13 @@ export default function Home({ allPostsData }) {
         <h2>Blog</h2>
         
         <ul className="flex flex-col">
-          {allPostsData.map(({ id, date, title, author, author_pic }) => (
+          {allPostsData.map(({ id, date, title, author }) => (
             <li key={id}>
               <PostCard 
                 id={id}
                 title={title} 
                 date={date} 
-                author={author} 
-                author_pic={author_pic} 
+                author={getAuthor(author)}
                 category="Uncategorized"
               />
             </li>
