@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
+import Layout from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
-import Link from 'next/link';
 import PostCard from '../components/post-card';
 import { getAuthor } from '../lib/authors';
 
@@ -19,9 +18,6 @@ export async function getStaticProps() {
 export default function Home({ allPostsData }) {
   return (
     <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
       <section className="text-center">
         <p>[Your Self Introduction]</p>
         <p>
@@ -30,22 +26,19 @@ export default function Home({ allPostsData }) {
         </p>
       </section>
 
-      <section>
-        <h2>Blog</h2>
-        
-        <ul className="flex flex-col">
-          {allPostsData.map(({ id, date, title, author }) => (
-            <li key={id}>
-              <PostCard 
-                id={id}
-                title={title} 
-                date={date} 
-                author={getAuthor(author)}
-                category="Uncategorized"
-              />
-            </li>
-          ))}
-        </ul>
+      <section className="grid grid-cols-3 gap-4">
+        {allPostsData.map(({ id, date, title, author, description }) => (
+          <div>
+            <PostCard
+              id={id}
+              title={title}
+              date={date}
+              author={getAuthor(author)}
+              category="Uncategorized"
+              description={description}
+            />
+          </div>
+        ))}
       </section>
     </Layout>
   )

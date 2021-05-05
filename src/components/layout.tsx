@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import blogConfig from '../../data/config';
 
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -9,7 +10,6 @@ import AuthorCard from './author-card';
 import { getAuthor } from '../lib/authors';
 
 const name = 'Ahmed Ali';
-export const siteTitle = 'Next.js Sample Website';
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -35,11 +35,12 @@ export default function Layout({ children }) {
         <meta
           property="og:image"
           content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
+            blogConfig.title
           )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
         />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="og:title" content={blogConfig.title} />
         <meta name="twitter:card" content="summary_large_image" />
+        <title>{blogConfig.title}</title>
       </Head>
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
@@ -114,12 +115,8 @@ export default function Layout({ children }) {
           </>
         )}
       </Disclosure>
-      <main className="px-4 py-6 flex flex-row flex-wrap">
-        <div className="flex flex-col items-center w-full md:w-9/12 ">{children}</div>
-        <div className="flex flex-col justify-center items-center w-full md:w-3/12">
-          <AuthorCard author={getAuthor('ahmedali7o1')} />
-          <AuthorCard author={getAuthor('ahmedali7o1')} />
-        </div>
+      <main className="px-4 py-6 flex flex-row flex-wrap bg-gray-100">
+        <div className="flex flex-col items-center w-full">{children}</div>
       </main>
       <footer className="bg-gray-100 sm:py-6">
         <div className="container mx-auto px-4">

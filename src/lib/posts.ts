@@ -14,7 +14,7 @@ type PostData = {
 
 export function getSortedPostsData() {
   // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDir)
+  const fileNames = fs.readdirSync(postsDir);
   const allPostsData: PostData[] = fileNames.map(fileName => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '')
@@ -26,12 +26,22 @@ export function getSortedPostsData() {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents)
 
+    // Validate
+    if ((<any>matterResult.data).description.length > 250) {
+      throw new Error(`description length of ${(<any>matterResult.data).description.length} exceeds the max limit 250`);
+    }
+
+    if ((<any>matterResult.data).title.length > 60) {
+      throw new Error(`title length of ${(<any>matterResult.data).title.length} exceeds the max limit 60`);
+    }
+    
     // Combine the data with the id
     return {
       id,
       ...matterResult.data
     } as PostData
-  })
+  });
+
   // Sort posts by date
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {

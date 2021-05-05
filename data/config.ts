@@ -5,7 +5,7 @@ import { BlogConfig } from '../src/types';
  */
 const config: BlogConfig = {
 
-  name: 'DevBlog',
+  title: 'DevBlog',
   authors: [
     {
       id: 'ahmedali7o1',

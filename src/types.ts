@@ -2,7 +2,7 @@ export type BlogConfig = {
   /**
    * Blog Name
    */
-  name: string;
+  title: string;
   
   /** 
    * Git repo URL for editing
@@ -39,6 +39,7 @@ export type PostMetadata = {
   title: string;
   date: string;
   author: string;
+  description: string;
 };
 
 export type PostCardParams = {
@@ -47,6 +48,7 @@ export type PostCardParams = {
   title: string; 
   author: Author;
   id: string;
+  description: string;
 }
 
 export type AuthorCardParams = {

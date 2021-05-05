@@ -11,11 +11,11 @@ export default function PostCard(params: PostCardParams) {
         <span className="font-light text-gray-600"><Date dateString={params.date} /></span>
         <a className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{params.category}</a>
       </div>
-      <div className="mt-2">
+      <div className="flex flex-col mt-2 h-52">
         <Link href={`/posts/${params.id}`}>
           <a className="text-2xl text-gray-700 font-bold hover:text-gray-600">{params.title}</a>
         </Link>
-        <p className="mt-2 text-gray-600">{params.title}{params.title}</p>
+        <p className="truncate whitespace-normal mt-2 text-gray-600">{params.description}</p>
       </div>
       <div className="flex justify-between items-center mt-4">
         <Link href={`/posts/${params.id}`}>
