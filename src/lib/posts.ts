@@ -3,7 +3,13 @@ import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
 import html from 'remark-html';
-import { postsDir } from './common';
+import recommended from 'remark-preset-lint-recommended';
+import headings from 'remark-autolink-headings';
+import slug from 'remark-slug';
+import remarkReact from 'remark-react';
+import remarkPrism from 'remark-prism';
+
+const postsDir = path.join(process.cwd(), 'data', 'posts');
 
 
 type PostData = {
@@ -26,15 +32,6 @@ export function getSortedPostsData() {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents)
 
-    // Validate
-    if ((<any>matterResult.data).description.length > 250) {
-      throw new Error(`description length of ${(<any>matterResult.data).description.length} exceeds the max limit 250`);
-    }
-
-    if ((<any>matterResult.data).title.length > 60) {
-      throw new Error(`title length of ${(<any>matterResult.data).title.length} exceeds the max limit 60`);
-    }
-    
     // Combine the data with the id
     return {
       id,
@@ -85,10 +82,16 @@ export async function getPostData(id) {
   const matterResult = matter(fileContents)
 
   // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
+  const contentHtml = await remark()
+    .use(recommended)
+    
+    .use(slug)
+    .use(headings, { behavior: 'wrap' })
+    .use(remarkPrism)
+
     .use(html)
-    .process(matterResult.content)
-  const contentHtml = processedContent.toString()
+    .processSync(matterResult.content)
+    .toString()
 
   // Combine the data with the id and contentHtml
   return {

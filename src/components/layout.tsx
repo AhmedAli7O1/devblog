@@ -115,10 +115,10 @@ export default function Layout({ children }) {
           </>
         )}
       </Disclosure>
-      <main className="px-4 py-6 flex flex-row flex-wrap bg-gray-100">
-        <div className="flex flex-col items-center w-full">{children}</div>
+      <main className="px-4 py-12 flex flex-col flex-wrap bg-gray-100 items-center w-full">
+        {children}
       </main>
-      <footer className="bg-gray-100 sm:py-6">
+      <footer className="bg-gray-200 sm:py-6">
         <div className="container mx-auto px-4">
           <div className="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
             <div className="px-4 sm:w-1/2 md:w-1/2 xl:w-1/3">
@@ -179,7 +179,7 @@ export default function Layout({ children }) {
               </ul>
             </div>
           </div>
-          <div className="sm:flex justify-center sm:flex-wrap sm:-mx-4 sm:mt-6 sm:pt-6 border-t">
+          <div className="sm:flex justify-center sm:flex-wrap sm:-mx-4 sm:mt-6 sm:pt-6 border-t border-gray-300">
             <p>
               Copyright ©
               {" "}

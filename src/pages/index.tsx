@@ -18,17 +18,8 @@ export async function getStaticProps() {
 export default function Home({ allPostsData }) {
   return (
     <Layout>
-      <section className="text-center">
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-
-      <section className="grid grid-cols-3 gap-4">
+      <section className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {allPostsData.map(({ id, date, title, author, description }) => (
-          <div>
             <PostCard
               id={id}
               title={title}
@@ -37,7 +28,6 @@ export default function Home({ allPostsData }) {
               category="Uncategorized"
               description={description}
             />
-          </div>
         ))}
       </section>
     </Layout>
