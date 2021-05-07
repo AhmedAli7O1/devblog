@@ -7,3 +7,7 @@ export function getAuthor(id: string) {
 export function getAuthors() {
   return blogConfig.authors;
 }
+
+export function getAuthorsIds() {
+  return blogConfig.authors.map(author => author.id);
+}

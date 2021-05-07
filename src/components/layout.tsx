@@ -12,11 +12,12 @@ import { getAuthor } from '../lib/authors';
 const name = 'Ahmed Ali';
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Open Source', href: '#', current: false },
-  { name: 'Backend', href: '#', current: false },
-  { name: 'Security', href: '#', current: false },
-  { name: 'About', href: '#', current: false },
+  { name: 'Home', href: '/', current: true },
+  // { name: 'Open Source', href: '#', current: false },
+  // { name: 'Backend', href: '#', current: false },
+  // { name: 'Security', href: '#', current: false },
+  // { name: 'About', href: '#', current: false },
+  { name: 'Authors', href: '/authors', current: false },
 ]
 
 function classNames(...classes) {
@@ -74,17 +75,23 @@ export default function Layout({ children }) {
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'px-3 py-2 rounded-md text-sm font-medium'
-                          )}
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </a>
+                        <Link key={item.name} href={item.href}>
+                          <a 
+                            className={classNames(
+                              item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              'px-3 py-2 rounded-md text-sm font-medium'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                          >{item.name}</a>
+                        </Link>
+                        // <a
+                        //   key={item.name}
+                        //   href={item.href}
+                          
+                        //   aria-current={item.current ? 'page' : undefined}
+                        // >
+                        //   {item.name}
+                        // </a>
                       ))}
                     </div>
                   </div>
@@ -115,7 +122,7 @@ export default function Layout({ children }) {
           </>
         )}
       </Disclosure>
-      <main className="px-4 py-12 flex flex-col flex-wrap bg-gray-100 items-center w-full">
+      <main className="min-h-screen px-4 py-12 flex flex-col flex-wrap bg-gray-100 items-center w-full">
         {children}
       </main>
       <footer className="bg-gray-200 sm:py-6">

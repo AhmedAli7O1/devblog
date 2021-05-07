@@ -9,5 +9,15 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
-  ]
+  ],
+  theme: {
+    extend: {
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10',
+      }
+    }
+  }
 };

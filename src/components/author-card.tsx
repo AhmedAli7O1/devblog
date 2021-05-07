@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { AuthorCardParams } from '../types';
 import SocialIcons from './social-icons';
 
@@ -13,7 +14,7 @@ export default function AuthorCard(params: AuthorCardParams) {
         width={320}
         alt="Author cover photo"
       />
-      <div className="flex justify-center -mt-8">
+      <div className="flex justify-center -mt-20">
         <Image
           src={params.author.avatar}
           className="rounded-full border-solid border-white border-2 mt-3"
@@ -23,8 +24,14 @@ export default function AuthorCard(params: AuthorCardParams) {
         />
       </div>
       <div className="text-center px-3 pb-6 pt-2">
-        <h3 className="text-black text-lg bold">{params.author.name}</h3>
-        <p className="mt-2 font-light text-grey-dark">{params.author.bio}</p>
+        <h3 className="text-black text-lg bold">
+          <Link
+            href={`/authors/${params.author.id}`}
+          >
+            <a>{params.author.name}</a>
+          </Link>
+        </h3>
+        <p className="mt-2 py-1 font-light text-grey-dark line-clamp-7 h-44">{params.author.bio}</p>
       </div>
       <div className="flex justify-center pb-4 pt-4 border-t">
         <SocialIcons social={params.author.social} />
