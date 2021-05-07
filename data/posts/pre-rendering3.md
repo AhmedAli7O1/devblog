@@ -7,7 +7,7 @@ description: 'When to Use Static Generation v.s. Server-side RenderingWhen to Us
 
 ## Welcome to NodeArch
 
-NodeArch is a Node.js backend framework targeting to solve the design and architectural problems when creating Node.js APPs for the backend. Using Typescript and dependency injection, we bring the concepts we used to in languages like Java, C# etc. While still getting the best out of Javascript flexibility and Node.js non-blocking I/O model. There is also a big focus on wiring everything together, so our intention is not to reinvent/rewrite the tools/frameworks we already know and use. Instead, our target is to wire everything together and leverage the opensource community behind Node.js and Javascript. You can think of NodeArch as the glue that links all your tools and libraries together and helps create a readable, maintainable and scalable application architecture. 
+NodeArch is a Node.js `backend framework` targeting to solve the design and architectural problems when creating Node.js APPs for the backend. Using Typescript and dependency injection, we bring the concepts we used to in languages like Java, C# etc. While still getting the best out of Javascript flexibility and Node.js non-blocking I/O model. There is also a big focus on wiring everything together, so our intention is not to reinvent/rewrite the tools/frameworks we already know and use. Instead, our target is to wire everything together and leverage the opensource community behind Node.js and Javascript. You can think of NodeArch as the glue that links all your tools and libraries together and helps create a readable, maintainable and scalable application architecture. 
 
 
 ## Links
@@ -83,6 +83,48 @@ Contributions, issues and feature requests are welcome! If you like the idea and
 * [Node.js](https://nodejs.org/en/download/)
 * [Microsoft Rush](https://rushjs.io/pages/intro/get_started/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+```jsx
+import Image from 'next/image';
+import Link from 'next/link';
+import Date from '../components/date';
+import { PostCardParams } from '../types';
+
+
+export default function PostCard(params: PostCardParams) {
+  return (
+    <div className="max-w-lg px-10 py-6 bg-white rounded-lg shadow-md">
+      <div className="flex justify-between items-center">
+        <span className="font-light text-gray-600"><Date dateString={params.date} /></span>
+        <a className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{params.category}</a>
+      </div>
+      <div className="flex flex-col mt-2 h-32 md:h-44">
+        <Link href={`/posts/${params.id}`}>
+          <a className="line-clamp-2 text-lg md:text-xl lg:text-2xl text-gray-700 font-bold hover:text-gray-600">{params.title}</a>
+        </Link>
+        <p className="line-clamp-2 md:line-clamp-4 mt-2 text-gray-600">{params.description}</p>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <Link href={`/posts/${params.id}`}>
+          <a className="text-blue-600 hover:underline">Read more</a>
+        </Link>
+        <div>
+          <a className="flex items-center space-x-2" href="#">
+            <Image 
+              src={params.author.avatar}
+              className="rounded-full"
+              alt="avatar"
+              width={32}
+              height={32}
+            />
+            <h1 className="text-gray-700 font-bold">{params.author.name}</h1>
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
 
 ### Setup
 Clone the project on your local machine, using the following command.
