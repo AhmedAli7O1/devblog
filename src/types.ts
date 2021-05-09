@@ -1,3 +1,29 @@
+/** Markdown Metadata interfaces */
+
+export type MarkdownMetadataBase = {
+  content: string;
+};
+
+export type PostMetadata = MarkdownMetadataBase & {
+  title: string;
+  date: string;
+  author: string;
+  description: string;
+  category: string;
+};
+
+export type AuthorMetadata = MarkdownMetadataBase & {
+  name: string;
+  avatar: string;
+  cover: string;
+  bio: string;
+  github?: string;
+  linkedIn?: string;
+};
+
+
+/** Components Types */
+
 export type BlogConfig = {
   /**
    * Blog Name
@@ -10,15 +36,7 @@ export type BlogConfig = {
    * if left empty, editing button will not be enabled
    */
   editUrl?: string;
-
-  /**
-   * Blog authors.
-   * avatar and cover should be relative paths to images 
-   * in the public folder. 
-   * You could use github/gitlab username as an id for example.
-   */
-  authors: Author[];
-}
+};
 
 export type Author = {
   id: string;
@@ -26,35 +44,34 @@ export type Author = {
   avatar: string;
   cover: string;
   bio: string;
-  social?: Social;
-}
+  body: string;
+  social: Social;
+};
 
 export type Social = {
   linkedIn?: string;
   github?: string;
-}
-
-export type PostMetadata = {
-  id: string;
-  title: string;
-  date: string;
-  author: string;
-  description: string;
 };
 
-export type PostCardParams = {
-  date: string;
-  category: string;
-  title: string; 
-  author: Author;
+export type Post = {
   id: string;
-  description: string;
-}
-
-export type AuthorCardParams = {
+  body: string;
   author: Author;
-}
+  title: string;
+  date: string;
+  description: string;
+  category: string;
+};
 
-export type SocialIconsParams = {
-  social?: Social;
+
+/** Other types  */
+
+export type PagePath = {
+  params: {
+    id: string;
+  };
+};
+
+export type PageParams = {
+  id: string;
 };

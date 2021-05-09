@@ -1,33 +1,28 @@
-import Head from 'next/head';
 import Layout from '../components/layout';
-import { getSortedPostsData } from '../lib/posts';
 import PostCard from '../components/post-card';
-import { getAuthor } from '../lib/authors';
+import { getPaths } from '../lib/markdown';
+import { getPost } from '../lib/posts';
+import { Post } from '../types';
 
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const posts = getPaths('posts').map(x => {
+    return getPost(x.params.id);
+  }); 
 
   return {
     props: {
-      allPostsData
+      posts
     }
   };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ posts } : { posts: Post[] }) {
   return (
     <Layout>
       <section className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {allPostsData.map(({ id, date, title, author, description }) => (
-            <PostCard
-              id={id}
-              title={title}
-              date={date}
-              author={getAuthor(author)}
-              category="Uncategorized"
-              description={description}
-            />
+        {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
         ))}
       </section>
     </Layout>

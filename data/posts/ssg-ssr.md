@@ -2,6 +2,7 @@
 title: 'When to Use Static Generation v.s. Server-side Rendering When to Use Static Generation v.s. Server-side Rendering When to Use Static Generation v.s. Server-side Rendering When to Use Static Generation v.s. Server-side Rendering'
 date: '2020-01-02'
 author: 'ahmedali7o1'
+category: 'Uncategorized'
 description: 'When to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side Rendering Use Static Generatissssss When to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side Rendering Use Static Generatissssss'
 ---
 

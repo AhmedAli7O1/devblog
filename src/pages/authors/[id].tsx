@@ -1,66 +1,61 @@
 import Image from 'next/image';
 import Layout from '../../components/layout';
-import { getAuthorsIds, getAuthor } from '../../lib/authors';
-import { Author } from '../../types';
+import { getAuthor } from '../../lib/authors';
+import { getPaths } from '../../lib/markdown';
+import { Author, PageParams } from '../../types';
 
 
-export async function getStaticPaths() {
-  const authorsIds = getAuthorsIds();
-
+export function getStaticPaths() {
   return {
-    paths: authorsIds.map(authorId => {
-      return {
-        params: { id: authorId }
-      };
-    }),
+    paths: getPaths('authors'),
     fallback: false
   }
 }
 
-export async function getStaticProps({ params }) {
+export function getStaticProps({ params }: { params: PageParams }) {
 
-  const authorInfo = getAuthor(params.id);
+  const author = getAuthor(params.id);
 
   return {
     props: {
-      authorInfo: authorInfo
+      author
     }
   }
 }
 
-export default function AuthorPage(params: { authorInfo: Author }) {
+export default function AuthorPage({ author }: { author: Author }) {
   return (
     <Layout>
 
-      <div className="bg-white h-72 w-full md:w-9/12 md:max-w-4xl">
-        {/* <div className="h-48 w-full bg-cover bg-black" style={{backgroundImage: 'url(/images/authors/ahmedali7o1/cover.jpg)'}}></div> */}
-        
+      <div className="bg-white min-h-screen w-full md:w-9/12 md:max-w-4xl">
         <div className="h-48 relative">
           <Image 
-            src="/images/authors/ahmedali7o1/cover.jpg"
+            src={author.cover}
             layout="fill"
             objectFit="cover"
             objectPosition="center"
           />
         </div>
 
-          <div className="px-6 md:px-32 flex justify-between lg:flex-row flex-col">
-            <div className="flex lg:flex-row flex-col">
+          {/* <div className="px-6 md:px-32 flex justify-between lg:flex-row flex-col"> */}
+            <div className="flex lg:flex-row flex-col px-12 md:px32 justify-between border-b">
               <div className="w-36 h-36 bg-cover bg-black rounded-full bg-center absolute transform -translate-y-1/2 ring-4 ring-white">
                 <Image 
                   priority
                   className="rounded-full"
-                  src="/images/authors/ahmedali7o1/profile.jpg"
+                  src={author.avatar}
                   width={144}
                   height={144}
                 />
               </div>
-              <p className="lg:ml-36 mt-16 lg:mt-0 pl-4 text-3xl font-semibold py-5">
-                Ahmed Ali
+              <p className="lg:ml-36 mt-16 lg:mt-0 pl-4 text-3xl font-semibold py-6">
+                {author.name}
               </p>
             </div>
-            
-          </div>
+            <div className="p-12 mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: author.body }} />
+
+          {/* </div> */}
+          
       </div>
 
     </Layout>

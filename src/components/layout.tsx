@@ -1,15 +1,10 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import blogConfig from '../../data/config';
 
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import AuthorCard from './author-card';
-import { getAuthor } from '../lib/authors';
+import { Disclosure } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
-const name = 'Ahmed Ali';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },

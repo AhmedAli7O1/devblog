@@ -2,6 +2,7 @@
 title: 'Two Forms of Pre-rendering Two Forms of Pre-rendering Two Fo'
 date: '2020-01-01'
 author: 'ahmedali7o1'
+category: 'Uncategorized'
 description: 'When to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side Rendering Use Static Generatissssss'
 ---
 

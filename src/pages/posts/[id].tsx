@@ -1,53 +1,38 @@
 import Layout from '../../components/layout';
-import { getAllPostIds, getPostData } from '../../lib/posts';
-import Head from 'next/head';
 import Date from '../../components/date';
-import utilStyles from '../../styles/utils.module.css';
-import { Fragment } from 'react'
 import {
-  BriefcaseIcon,
   CalendarIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  CurrencyDollarIcon,
-  LinkIcon,
-  LocationMarkerIcon,
   PencilIcon,
   UserIcon
 } from '@heroicons/react/solid'
-import { Menu, Transition } from '@headlessui/react'
 import Image from 'next/image';
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
+import { getPaths } from '../../lib/markdown';
+import { PageParams, Post } from '../../types';
+import { getPost } from '../../lib/posts';
 
 
-export async function getStaticPaths() {
-  const paths = getAllPostIds();
-
+export function getStaticPaths() {
   return {
-    paths,
+    paths: getPaths('posts'),
     fallback: false
   }
 }
 
-export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.id)
+export function getStaticProps({ params }: { params: PageParams }) {
+  const post = getPost(params.id);
 
   return {
     props: {
-      postData
+      post
     }
   }
 }
 
-export default function Post({ postData }) {
+export default function PostPage({ post }: { post: Post }) {
   return (
     <Layout>
       <article className="w-full md:w-9/12 md:max-w-4xl">
-        <h2 className="whitespace-normal text-2xl font-bold leading-7 text-gray-900 sm:text-3xl min-w-0 md:w-9/12">{postData.title}</h2>
+        <h2 className="whitespace-normal text-2xl font-bold leading-7 text-gray-900 sm:text-3xl min-w-0 md:w-9/12">{post.title}</h2>
 
         {/* Icons */}
         <div className="mt-8 flex flex-row flex-wrap space-x-6">
@@ -71,7 +56,7 @@ export default function Post({ postData }) {
 
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                <Date dateString={postData.date} />
+                <Date dateString={post.date} />
               </div>
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <PencilIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -94,7 +79,7 @@ export default function Post({ postData }) {
           </span>
         </div> */}
 
-        <div className="mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <div className="mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: post.body }} />
       </article>
     </Layout>
   )
