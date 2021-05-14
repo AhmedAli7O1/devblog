@@ -32,7 +32,7 @@ export type BlogConfig = {
   
   /** 
    * Git repo URL for editing
-   * e.g. https://github.com/ahmedali7o1/devblog/edit/master/
+   * e.g. https://github.com/ahmedali7o1/devblog/edit/master
    * if left empty, editing button will not be enabled
    */
   editUrl?: string;

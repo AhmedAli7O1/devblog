@@ -5,7 +5,9 @@ import { BlogConfig } from '../src/types';
  */
 const config: BlogConfig = {
 
-  title: 'DevBlog'
+  title: 'DevBlog',
+  editUrl: 'https://github.com/ahmedali7o1/devblog/edit/develop'
+
 };
 
 export default config;

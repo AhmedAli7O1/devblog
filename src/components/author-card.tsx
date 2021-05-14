@@ -6,7 +6,7 @@ import SocialIcons from './social-icons';
 
 export default function AuthorCard({ author }: { author: Author }) {
   return (
-    <div className="rounded rounded-t-lg overflow-hidden shadow max-w-xs my-3">
+    <div className="rounded rounded-t-lg overflow-hidden shadow max-w-xs my-3 bg-white">
       <Image
         src={author.cover}
         className="w-full"
