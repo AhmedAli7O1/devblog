@@ -8,19 +8,20 @@ import headings from 'remark-autolink-headings';
 import slug from 'remark-slug';
 import remarkPrism from 'remark-prism';
 import { MarkdownMetadataBase, PagePath } from '../types';
+import blogConfig from '../../data/config';
 
 
-export function getPaths(dataDir: string): PagePath[] {
+export function getIds(dataDir: string): string[] {
   const dirPath = path.join(process.cwd(), 'data', dataDir);
   const fileNames = fs.readdirSync(dirPath);
   
   return fileNames.map(fileName => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, '')
-      }
-    };
+    return fileName.replace(/\.md$/, '');
   });
+}
+
+export function getPagesCount(dataDir: string) {
+  return Math.ceil(getIds(dataDir).length / blogConfig.posts.perPage);
 }
 
 export function loadFile(fullPath: string) {
@@ -37,6 +38,7 @@ export function getMetadata<T extends MarkdownMetadataBase>(dataDir: string, id:
     ...matterResult.data
   } as T;
 }
+
 
 // export function getMetadata<T extends MarkdownMetadataBase>(dataDir: string, ids: string[]): T[] {
 //   const result: T[] = [];

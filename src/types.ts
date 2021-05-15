@@ -1,15 +1,22 @@
-/** Markdown Metadata interfaces */
-
 export type MarkdownMetadataBase = {
   content: string;
 };
 
-export type PostMetadata = MarkdownMetadataBase & {
+export type BasePost = MarkdownMetadataBase & {
   title: string;
-  date: string;
-  author: string;
   description: string;
   category: string;
+  date: string;
+};
+
+export type PostMetadata = BasePost & {
+  date: string;
+  authorId: string;
+};
+
+export type Post = BasePost & {
+  id: string;
+  author: Author;
 };
 
 export type AuthorMetadata = MarkdownMetadataBase & {
@@ -36,6 +43,10 @@ export type BlogConfig = {
    * if left empty, editing button will not be enabled
    */
   editUrl?: string;
+
+  posts: {
+    perPage: number;
+  };
 };
 
 export type Author = {
@@ -53,15 +64,7 @@ export type Social = {
   github?: string;
 };
 
-export type Post = {
-  id: string;
-  body: string;
-  author: Author;
-  title: string;
-  date: string;
-  description: string;
-  category: string;
-};
+
 
 
 /** Other types  */
@@ -74,4 +77,14 @@ export type PagePath = {
 
 export type PageParams = {
   id: string;
+};
+
+export type PaginationOptions = {
+  pages: {
+    url?: string;
+    label: string;
+    current?: boolean;
+  }[];
+  prevUrl: string;
+  nextUrl: string;
 };

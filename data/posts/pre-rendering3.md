@@ -1,7 +1,7 @@
 ---
 title: 'Two Forms of Pre-rendering Two Forms of Pre-rendering Two Fo'
 date: '2020-01-01'
-author: 'ahmedali7o1'
+authorId: 'ahmedali7o1'
 category: 'Uncategorized'
 description: 'When to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side RenderingWhen to Use Static Generation v.s. Server-side Rendering Use Static Generatissssss'
 ---
@@ -20,7 +20,7 @@ NodeArch is a Node.js `backend framework` targeting to solve the design and arch
 
 You need to install the NodeArch command-line interface to be able to generate new apps. Start by Running the following command in your terminal to install the CLI globally.
 
-```sh
+```shell
 npm i -g @nodearch/cli
 ```
 
@@ -37,7 +37,7 @@ Once installed, you can run `nodearch -h` in your terminal to see the usage.
 
 ## 🚀 Usage
 
-```sh
+```shell
 # start your app
 nodearch start
 
@@ -52,26 +52,6 @@ nodearch test -w
 
 # build your app ( only required in production mode )
 nodearch build
-```
-```bash
-❯ nodearch -h
-Usage: nodearch <command> [options]
-
-Commands:
-  nodearch build  Build NodeArch app                                [aliases: b]
-  nodearch new    Generate new NodeArch APP                         [aliases: n]
-  nodearch start  Start NodeArch APP                                [aliases: s]
-  nodearch test   run automated testing                             [aliases: t]
-
-Options:
-  -y, --notify   turn desktop notifier on or off       [boolean] [default: true]
-  -h, --help     Show help                                             [boolean]
-  -v, --version  Show version number                                   [boolean]
-
-Examples:
-  nodearch new    generates new app
-  nodearch build  build existing app from the current directory
-  nodearch start  starts existing app from the current directory
 ```
 
 for all the options, please check the [documentation](https://nodearch.io/docs)

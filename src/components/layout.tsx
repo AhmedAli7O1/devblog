@@ -37,6 +37,10 @@ export default function Layout({ children }) {
         <meta name="og:title" content={blogConfig.title} />
         <meta name="twitter:card" content="summary_large_image" />
         <title>{blogConfig.title}</title>
+        <link
+          href={`https://unpkg.com/prismjs@0.0.1/themes/prism-okaidia.css`}
+          rel="stylesheet"
+        />
       </Head>
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (

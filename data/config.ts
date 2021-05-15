@@ -6,8 +6,12 @@ import { BlogConfig } from '../src/types';
 const config: BlogConfig = {
 
   title: 'DevBlog',
-  editUrl: 'https://github.com/ahmedali7o1/devblog/edit/develop'
+  editUrl: 'https://github.com/ahmedali7o1/devblog/edit/develop',
 
+  posts: {
+    perPage: 7
+  }
+  
 };
 
 export default config;

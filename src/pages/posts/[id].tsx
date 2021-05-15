@@ -6,7 +6,7 @@ import {
   UserIcon
 } from '@heroicons/react/solid'
 import Image from 'next/image';
-import { getPaths } from '../../lib/markdown';
+import { getHtml, getIds } from '../../lib/markdown';
 import { PageParams, Post } from '../../types';
 import { getPost } from '../../lib/posts';
 import Link from 'next/link';
@@ -15,24 +15,26 @@ import blogConfig from '../../../data/config';
 
 export function getStaticPaths() {
   return {
-    paths: getPaths('posts'),
+    paths: getIds('posts').map(id => ({ params: { id } })),
     fallback: false
   }
 }
 
 export function getStaticProps({ params }: { params: PageParams }) {
   const post = getPost(params.id);
+  const html = getHtml(post.content);
   const editUrl = blogConfig.editUrl ? `${blogConfig.editUrl}/data/posts/${post.id}.md` : null;
 
   return {
     props: {
       post,
+      html,
       editUrl
     }
   }
 }
 
-export default function PostPage({ post, editUrl }: { post: Post, editUrl?: string }) {
+export default function PostPage({ post, html, editUrl }: { post: Post, html: string, editUrl?: string }) {
   return (
     <Layout>
       <article className="w-full md:w-9/12 md:max-w-4xl bg-white min-h-screen p-12">
@@ -79,7 +81,7 @@ export default function PostPage({ post, editUrl }: { post: Post, editUrl?: stri
 
           </div>
         </div>
-        <div className="mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: post.body }} />
+        <div className="mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
       </article>
     </Layout>
   )

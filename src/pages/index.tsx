@@ -1,30 +1,36 @@
 import Layout from '../components/layout';
 import PostCard from '../components/post-card';
-import { getPaths } from '../lib/markdown';
-import { getPost } from '../lib/posts';
-import { Post } from '../types';
+import PostListing from '../components/post-listing';
+import { getPost, getPosts } from '../lib/posts';
+import { PaginationOptions, Post } from '../types';
 
 
 export async function getStaticProps() {
-  const posts = getPaths('posts').map(x => {
-    return getPost(x.params.id);
-  }); 
+  const posts = getPosts(1);
+  const pagination: PaginationOptions = {
+    pages: [
+      { label: '1', url: '/pages/1' },
+      { label: '2', url: '/pages/2' },
+      { label: '3', url: '/pages/3' },
+      { label: '...' },
+      { label: '5', url: '/pages/5', current: true },
+      { label: '6', url: '/pages/6' },
+      { label: '7', url: '/pages/7' },
+    ],
+    prevUrl: '/pages/1',
+    nextUrl: '/pages/3'
+  };
 
   return {
     props: {
-      posts
+      posts,
+      pagination
     }
   };
 }
 
-export default function Home({ posts } : { posts: Post[] }) {
+export default function Home({ posts, pagination } : { posts: Post[], pagination: PaginationOptions }) {
   return (
-    <Layout>
-      <section className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-        ))}
-      </section>
-    </Layout>
+    <PostListing posts={posts} pagination={pagination}></PostListing>
   )
 }
