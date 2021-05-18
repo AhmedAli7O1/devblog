@@ -2,6 +2,7 @@ import { Post, PostMetadata } from '../types';
 import { getAuthor } from './authors';
 import { getMetadata, getIds } from './markdown';
 import blogConfig from '../../data/config';
+import { paginate } from './pagination';
 
 
 export function getPost(id: string): Post {
@@ -20,8 +21,8 @@ export function getPost(id: string): Post {
 }
 
 export function getPosts(page: number): Post[] {
-  const to = page * blogConfig.posts.perPage;
-  const from = to - blogConfig.posts.perPage;
+  const to = page * blogConfig.posts.pagination.perPage;
+  const from = to - blogConfig.posts.pagination.perPage;
 
   return getIds('posts')
     .map(id => getPost(id))
@@ -29,4 +30,13 @@ export function getPosts(page: number): Post[] {
       return +new Date(b.date) - +new Date(a.date);
     })
     .slice(from, to);
+}
+
+export function postsPagination(total: number, selected: number) {
+  return paginate({
+    ...blogConfig.posts.pagination,
+    pathPrefix: '/pages/',
+    selected,
+    total
+  });
 }

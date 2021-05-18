@@ -9,7 +9,12 @@ const config: BlogConfig = {
   editUrl: 'https://github.com/ahmedali7o1/devblog/edit/develop',
 
   posts: {
-    perPage: 7
+    pagination: {
+      perPage: 2,
+      breakLabel: '...',
+      marginPagesDisplayed: 3,
+      pageRangeDisplayed: 2
+    },
   }
   
 };

@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
-import { PaginationOptions } from '../types';
+import { PaginationInfo } from '../types';
 
 
-export default function Pagination ({ options }: { options: PaginationOptions }) {
+export default function Pagination({ paginationInfo }: { paginationInfo: PaginationInfo[] }) {
   return (
     <div className="px-4 py-3 flex items-center justify-between  sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -30,41 +30,43 @@ export default function Pagination ({ options }: { options: PaginationOptions })
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </a>
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            
+
             {
-              options.pages.map(page => (
+              paginationInfo.map(page => (
                 <>
-                  {page.url ? (
-                    <>
-                      {
-                        page.current ? (
-                          <a
-                            href={page.url}
-                            aria-current="page"
-                            className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                          >
-                            {page.label}
-                          </a>
-                        ) : (
-                          <a
-                            href={page.url}
-                            className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-                          >
-                            {page.label}
-                          </a>
-                        )
-                      }
-                    </>
-                  ):(
-                    <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-                      ...
-                    </span>
-                  )}
+                  {
+                    page.url ? (
+                      <>
+                        {
+                          page.current ? (
+                            <a
+                              href={page.url}
+                              aria-current="page"
+                              className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                            >
+                              {page.label}
+                            </a>
+                          ) : (
+                            <a
+                              href={page.url}
+                              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                            >
+                              {page.label}
+                            </a>
+                          )
+                        }
+                      </>
+                    ) : (
+                      <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                        {page.label}
+                      </span>
+                    )
+                  }
                 </>
               ))
             }
-            
-                  {/* <a
+
+            {/* <a
                     href="#"
                     aria-current="page"
                     className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
@@ -104,9 +106,9 @@ export default function Pagination ({ options }: { options: PaginationOptions })
                   >
                     10
                   </a> */}
-               
 
-            
+
+
 
             <a
               href="#"

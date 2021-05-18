@@ -11,17 +11,21 @@ import { MarkdownMetadataBase, PagePath } from '../types';
 import blogConfig from '../../data/config';
 
 
-export function getIds(dataDir: string): string[] {
+function getFiles(dataDir: string) {
   const dirPath = path.join(process.cwd(), 'data', dataDir);
-  const fileNames = fs.readdirSync(dirPath);
+  return fs.readdirSync(dirPath);
+}
+
+export function getCount(dataDir: string) {
+  return getFiles(dataDir).length;
+}
+
+export function getIds(dataDir: string): string[] {
+  const fileNames = getFiles(dataDir);
   
   return fileNames.map(fileName => {
     return fileName.replace(/\.md$/, '');
   });
-}
-
-export function getPagesCount(dataDir: string) {
-  return Math.ceil(getIds(dataDir).length / blogConfig.posts.perPage);
 }
 
 export function loadFile(fullPath: string) {

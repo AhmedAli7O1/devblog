@@ -1,4 +1,4 @@
-export function getPaginationPaths(pagesCount: number) {
+export function getPathsFromCount(pagesCount: number) {
   return Array.from(
     { length: pagesCount },
     (_, index) => {

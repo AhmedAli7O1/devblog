@@ -45,7 +45,24 @@ export type BlogConfig = {
   editUrl?: string;
 
   posts: {
-    perPage: number;
+    pagination: {
+      /**
+       * Number of posts per page
+       */
+      perPage: number;
+      /**
+       * The range of pages displayed.
+       */
+      pageRangeDisplayed: number;
+      /** 
+       * The number of pages to display for margins.
+       */
+      marginPagesDisplayed: number;
+      /**
+       * Label for ellipsis.
+       */
+      breakLabel: string;
+    };
   };
 };
 
@@ -79,12 +96,19 @@ export type PageParams = {
   id: string;
 };
 
+
 export type PaginationOptions = {
-  pages: {
-    url?: string;
-    label: string;
-    current?: boolean;
-  }[];
-  prevUrl: string;
-  nextUrl: string;
+  total: number;
+  perPage: number;
+  selected: number;
+  pageRangeDisplayed: number;
+  marginPagesDisplayed: number;
+  breakLabel: string;
+  pathPrefix: string;
+};
+
+export type PaginationInfo = {
+  label: string;
+  url?: string;
+  current?: boolean;
 };

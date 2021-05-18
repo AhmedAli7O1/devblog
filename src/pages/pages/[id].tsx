@@ -1,12 +1,12 @@
 import PostListing from '../../components/post-listing';
-import { getPagesCount } from '../../lib/markdown';
-import { getPaginationPaths } from '../../lib/paths';
-import { getPosts } from '../../lib/posts';
-import { PaginationOptions, Post } from '../../types';
+import { getCount, getIds } from '../../lib/markdown';
+import { getPathsFromCount } from '../../lib/paths';
+import { getPosts, postsPagination } from '../../lib/posts';
+import { PaginationInfo, PaginationOptions, Post } from '../../types';
 
 export function getStaticPaths() {
-  const pagesCount = getPagesCount('posts');
-  const paths = getPaginationPaths(pagesCount);
+  const count = getCount('posts');
+  const paths = getPathsFromCount(count);
 
   return {
     paths,
@@ -15,30 +15,23 @@ export function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const posts = getPosts(params.id);
+  const pageNumber = parseInt(params.id);
+
+  const count = getCount('posts');
+  const posts = getPosts(pageNumber);
   
-  const pagination: PaginationOptions = {
-    pages: [
-      { label: '1', url: '/pages/1' },
-      { label: '2', url: '/pages/2' },
-      { label: '3', url: '/pages/3' },
-      { label: '4', url: '/pages/4' },
-      { label: '5', url: '/pages/5' },
-    ],
-    prevUrl: '/pages/1',
-    nextUrl: '/pages/3'
-  };
+  const paginationInfo = postsPagination(count, pageNumber);
 
   return {
     props: {
       posts,
-      pagination
+      paginationInfo
     }
   };
 }
 
-export default function Home({ posts, pagination } : { posts: Post[], pagination: PaginationOptions }) {
+export default function Home({ posts, paginationInfo } : { posts: Post[], paginationInfo: PaginationInfo[] }) {
   return (
-    <PostListing posts={posts} pagination={pagination}></PostListing>
+    <PostListing posts={posts} paginationInfo={paginationInfo}></PostListing>
   )
 }
