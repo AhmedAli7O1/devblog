@@ -62,6 +62,10 @@ export type BlogConfig = {
        * Label for ellipsis.
        */
       breakLabel: string;
+      /**
+       * override the path for the first page in the pagination
+       */
+      firstPageIndex?: boolean;
     };
   };
 };
@@ -105,10 +109,16 @@ export type PaginationOptions = {
   marginPagesDisplayed: number;
   breakLabel: string;
   pathPrefix: string;
+  indexPath: string;
+  firstPageIndex?: boolean;
 };
 
 export type PaginationInfo = {
-  label: string;
-  url?: string;
-  current?: boolean;
+  pages: {
+    label: string;
+    url?: string;
+    current?: boolean;
+  }[];
+  next?: string;
+  prev?: string;
 };

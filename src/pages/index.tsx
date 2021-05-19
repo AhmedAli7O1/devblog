@@ -1,25 +1,16 @@
 import PostListing from '../components/post-listing';
-import { getCount } from '../lib/markdown';
-import { getPosts, postsPagination } from '../lib/posts';
+import { getPostsPage } from '../lib/posts';
 import { PaginationInfo, Post } from '../types';
 
 
 export async function getStaticProps() {
-  const count = getCount('posts');
-  const posts = getPosts(1);
-
-  const paginationInfo: PaginationInfo[] = postsPagination(count, 1);
-
   return {
-    props: {
-      posts,
-      paginationInfo
-    }
+    props: getPostsPage(1)
   };
 }
 
-export default function Home({ posts, paginationInfo } : { posts: Post[], paginationInfo: PaginationInfo[] }) {
+export default function Home({ posts, pagination } : { posts: Post[], pagination: PaginationInfo[] }) {
   return (
-    <PostListing posts={posts} paginationInfo={paginationInfo}></PostListing>
+    <PostListing posts={posts} pagination={pagination}></PostListing>
   )
 }

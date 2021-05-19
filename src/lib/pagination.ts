@@ -13,9 +13,18 @@ export function paginate({
   perPage,
   selected,
   total,
-  pathPrefix
-}: PaginationOptions): PaginationInfo[] {
-  const pages = [];
+  pathPrefix,
+  indexPath,
+  firstPageIndex
+}: PaginationOptions): PaginationInfo {
+  const paginationInfo: PaginationInfo = {
+    pages: []
+  };
+
+  const pages: (number | string)[] = []; 
+
+  if (total <= perPage) return paginationInfo;
+
 
   const pageCount = Math.ceil(total / perPage);
 
@@ -73,16 +82,33 @@ export function paginate({
     }
   }
 
-  return pages.map(page => {
+
+  paginationInfo.pages = pages.map(page => {
     if (page === breakLabel) {
       return { label: breakLabel };
     }
     else {
       return {
         label: page.toString(),
-        url: pathPrefix + page,
-        current: page === selected
+        current: page === selected,
+        url: (firstPageIndex && page === 1) ? indexPath : pathPrefix + page
       };
     }
   });
+
+  const selectedIndex = pages.indexOf(selected);
+
+  // make sure that the selected is not the last element 
+  if ((selectedIndex + 1) < pages.length) {
+    paginationInfo.next = pathPrefix + (selected + 1);
+  }
+
+  // make sure that selected is not the first element
+  if (selectedIndex > 0) {
+    const page = selected - 1;
+    paginationInfo.prev = (firstPageIndex && page === 1) ? indexPath : pathPrefix + page;
+  }
+
+
+  return paginationInfo;
 }
