@@ -9,7 +9,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ posts, pagination } : { posts: Post[], pagination: PaginationInfo[] }) {
+export default function Home({ posts, pagination } : { posts: Post[], pagination: PaginationInfo }) {
   return (
     <PostListing posts={posts} pagination={pagination}></PostListing>
   )

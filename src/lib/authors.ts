@@ -1,10 +1,10 @@
 import { Author, AuthorMetadata } from '../types';
-import { getHtml, getMetadata } from './markdown';
+import { getCount, getHtml, getIds, getMetadata } from './markdown';
+import { getPathsFromCount } from './paths';
 
 
 export function getAuthor(id: string): Author {
   const authorMetadata = getMetadata<AuthorMetadata>('authors', id);
-  const htmlContent = getHtml(authorMetadata.content);
   
   return {
     id,
@@ -12,10 +12,22 @@ export function getAuthor(id: string): Author {
     bio: authorMetadata.bio,
     avatar: authorMetadata.avatar,
     cover: authorMetadata.cover,
-    body: htmlContent,
+    content: authorMetadata.content,
     social: {
       github: authorMetadata.github,
       linkedIn: authorMetadata.linkedIn
     }
   };
+}
+
+export function getAuthors(): Author[] {
+  const ids = getIds('authors');
+
+  return ids
+    .map(id => getAuthor(id));
+}
+
+
+export function getAuthorsPaths() {
+  return getIds('authors').map(id => ({ params: { id } }));
 }

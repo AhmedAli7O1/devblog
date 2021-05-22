@@ -42,7 +42,7 @@ export default function Pagination({ options }: { options: PaginationInfo }) {
 
             {
               options.pages.map(page => (
-                <>
+                <div key={page.label}>
                   {
                     page.url ? (
                       <>
@@ -71,7 +71,7 @@ export default function Pagination({ options }: { options: PaginationInfo }) {
                       </span>
                     )
                   }
-                </>
+                </div>
               ))
             }
 

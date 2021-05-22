@@ -12,13 +12,13 @@ export default function PostCard({ post }: { post: Post }) {
         <a className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{post.category}</a>
       </div>
       <div className="flex flex-col mt-2 h-32 md:h-44">
-        <Link href={`/posts/${post.id}`}>
+        <Link href={`/${post.id}`}>
           <a className="line-clamp-2 text-lg md:text-xl lg:text-2xl text-gray-700 font-bold hover:text-gray-600">{post.title}</a>
         </Link>
         <p className="line-clamp-2 md:line-clamp-4 mt-2 text-gray-600">{post.description}</p>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <Link href={`/posts/${post.id}`}>
+        <Link href={`/${post.id}`}>
           <a className="text-blue-600 hover:underline">Read more</a>
         </Link>
         <div>

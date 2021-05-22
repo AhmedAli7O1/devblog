@@ -10,7 +10,7 @@ const config: BlogConfig = {
 
   posts: {
     pagination: {
-      perPage: 1,
+      perPage: 8,
       breakLabel: '...',
       marginPagesDisplayed: 3,
       pageRangeDisplayed: 2,

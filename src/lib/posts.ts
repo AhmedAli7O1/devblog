@@ -28,7 +28,6 @@ export function getPostsPage(page: number | string): { posts: Post[], pagination
 
   const to = page * blogConfig.posts.pagination.perPage;
   const from = to - blogConfig.posts.pagination.perPage;
-
   const ids = getIds('posts');
 
   const posts = ids
@@ -52,7 +51,7 @@ export function getPostsPage(page: number | string): { posts: Post[], pagination
   };
 }
 
-export function getPaths() {
+export function getPagesPaths() {
   const paths = getPathsFromCount(getCount('posts'))
 
   if (blogConfig.posts.pagination.firstPageIndex) {
@@ -60,4 +59,8 @@ export function getPaths() {
   }
 
   return paths;
+}
+
+export function getPostsPaths() {
+  return getIds('posts').map(id => ({ params: { id } }));
 }

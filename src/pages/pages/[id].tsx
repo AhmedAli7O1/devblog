@@ -1,10 +1,10 @@
 import PostListing from '../../components/post-listing';
-import { getPaths, getPostsPage } from '../../lib/posts';
+import { getPagesPaths, getPostsPage } from '../../lib/posts';
 import { PaginationInfo, Post } from '../../types';
 
 export function getStaticPaths() {
   return {
-    paths: getPaths(),
+    paths: getPagesPaths(),
     fallback: false
   }
 }

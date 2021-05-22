@@ -1,21 +1,21 @@
-import Layout from '../../components/layout';
-import Date from '../../components/date';
+import Layout from '../components/layout';
+import Date from '../components/date';
 import {
   CalendarIcon,
   PencilIcon,
   UserIcon
 } from '@heroicons/react/solid'
 import Image from 'next/image';
-import { getHtml, getIds } from '../../lib/markdown';
-import { PageParams, Post } from '../../types';
-import { getPost } from '../../lib/posts';
+import { getHtml, getIds } from '../lib/markdown';
+import { PageParams, Post } from '../types';
+import { getPost, getPostsPaths } from '../lib/posts';
 import Link from 'next/link';
-import blogConfig from '../../../data/config';
+import blogConfig from '../../data/config';
 
 
 export function getStaticPaths() {
   return {
-    paths: getIds('posts').map(id => ({ params: { id } })),
+    paths: getPostsPaths(),
     fallback: false
   }
 }

@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Layout from '../../components/layout';
-import { getAuthor } from '../../lib/authors';
-import { getPaths } from '../../lib/markdown';
+import { getAuthor, getAuthorsPaths } from '../../lib/authors';
+import { getHtml } from '../../lib/markdown';
 import { Author, PageParams } from '../../types';
 
 
 export function getStaticPaths() {
   return {
-    paths: getPaths('authors'),
+    paths: getAuthorsPaths(),
     fallback: false
   }
 }
@@ -15,15 +15,17 @@ export function getStaticPaths() {
 export function getStaticProps({ params }: { params: PageParams }) {
 
   const author = getAuthor(params.id);
+  const html = getHtml(author.content);
 
   return {
     props: {
-      author
+      author,
+      html
     }
   }
 }
 
-export default function AuthorPage({ author }: { author: Author }) {
+export default function AuthorPage({ author, html }: { author: Author, html: string }) {
   return (
     <Layout>
 
@@ -52,7 +54,7 @@ export default function AuthorPage({ author }: { author: Author }) {
                 {author.name}
               </p>
             </div>
-            <div className="p-12 mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: author.body }} />
+            <div className="p-12 mt-8 prose md:max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
 
           {/* </div> */}
           

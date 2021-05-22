@@ -19,15 +19,28 @@ export type Post = BasePost & {
   author: Author;
 };
 
-export type AuthorMetadata = MarkdownMetadataBase & {
+export type BaseAuthor = MarkdownMetadataBase & {
   name: string;
   avatar: string;
   cover: string;
   bio: string;
+};
+
+export type AuthorMetadata = BaseAuthor & {
   github?: string;
   linkedIn?: string;
 };
 
+
+export type Author = BaseAuthor & {
+  id: string;
+  social: Social;
+};
+
+export type Social = {
+  linkedIn?: string;
+  github?: string;
+};
 
 /** Components Types */
 
@@ -69,24 +82,6 @@ export type BlogConfig = {
     };
   };
 };
-
-export type Author = {
-  id: string;
-  name: string;
-  avatar: string;
-  cover: string;
-  bio: string;
-  body: string;
-  social: Social;
-};
-
-export type Social = {
-  linkedIn?: string;
-  github?: string;
-};
-
-
-
 
 /** Other types  */
 

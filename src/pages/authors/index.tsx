@@ -1,18 +1,13 @@
 import Layout from '../../components/layout';
 import { Author } from '../../types';
 import AuthorCard from '../../components/author-card';
-import { getPaths } from '../../lib/markdown';
-import { getAuthor } from '../../lib/authors';
+import { getAuthor, getAuthors } from '../../lib/authors';
 
 
 export async function getStaticProps() {
-  const authors = getPaths('authors').map(x => {
-    return getAuthor(x.params.id);
-  });
-
   return {
     props: {
-      authors
+      authors: getAuthors()
     }
   };
 }

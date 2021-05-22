@@ -62,7 +62,7 @@ export default function Layout({ children }) {
                   <div className="flex-shrink-0 flex items-center">
                     <img
                       className="block lg:hidden h-8 w-auto"
-                      src="images/logo.svg"
+                      src="/images/logo.svg"
                       alt="Workflow"
                     />
                     <img
