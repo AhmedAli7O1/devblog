@@ -40,6 +40,9 @@ export type Author = BaseAuthor & {
 export type Social = {
   linkedIn?: string;
   github?: string;
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
 };
 
 /** Components Types */
@@ -49,6 +52,11 @@ export type BlogConfig = {
    * Blog Name
    */
   title: string;
+
+  /**
+   * Blog description
+   */
+  description: string;
   
   /** 
    * Git repo URL for editing
@@ -56,6 +64,21 @@ export type BlogConfig = {
    * if left empty, editing button will not be enabled
    */
   editUrl?: string;
+
+  footer: {
+    copyright: string;
+    links: {
+      categories: {
+        name: string;
+        items: {
+          label: string;
+          url: string;
+        }[];
+      }[]; 
+    };
+  },
+
+  social?: Social;
 
   posts: {
     pagination: {
